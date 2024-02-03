@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
 #include <unistd.h>
@@ -52,16 +53,20 @@ int _printf(const char *format, ...)
 				format += 2;
 				count++;
 			}
-			else if (*(format + 1) == 'd' || *(format + 1) == 'i') 
+		/**	else if (*(format + 1) == 'd' || *(format + 1) == 'i') 
 			{
-				/* Handle %d or %i */
+				* Handle %d or %i *
 				int num = va_arg(args, int);
-				/* Assuming a simple implementation for integer printing */
-				char buffer[12];  /* Sufficient for 32-bit integers */
+				* Assuming a simple implementation for integer printing *
+				char buffer[12];  * Sufficient for 32-bit integers *
 				int len = snprintf(buffer, sizeof(buffer), "%d", num);
-				write(1, buffer, len);
-				format += 2;
-				printed_chars += len;
+				int i;
+				for (i = 0; i < len; i++)
+				{
+					_putchar(buffer[i]);
+					count++;
+				}
+				format += 2; */
 			else
 			{
 				/* invalid specifier or no specifier, print '%' */
