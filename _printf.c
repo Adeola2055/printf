@@ -52,6 +52,7 @@ int _printf(const char *format, ...)
 			{
 				/* handle %d or %i */
 				int num = va_arg(args, int);
+
 				count += print_digit(num);
 				format += 2;
 			}
