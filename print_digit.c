@@ -48,5 +48,6 @@ int print_digit(int num)
 			count++;
 		}
 	}
+	free(ptr);
 	return (count);
 }
