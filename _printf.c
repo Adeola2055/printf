@@ -1,3 +1,4 @@
+#include "main.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
@@ -47,26 +48,19 @@ int _printf(const char *format, ...)
 				}
 				format += 2; /* move past "%s" */
 			}
+			else if (*(format + 1) == 'd' || *(format + 1) == 'i')
+			{
+				/* handle %d or %i */
+				int num = va_arg(args, int);
+				count += print_digit(num);
+				format += 2;
+			}
 			else if (*(format + 1) == '%')
 			{
 				_putchar('%');
 				format += 2;
 				count++;
 			}
-		/**	else if (*(format + 1) == 'd' || *(format + 1) == 'i') 
-			{
-				* Handle %d or %i *
-				int num = va_arg(args, int);
-				* Assuming a simple implementation for integer printing *
-				char buffer[12];  * Sufficient for 32-bit integers *
-				int len = snprintf(buffer, sizeof(buffer), "%d", num);
-				int i;
-				for (i = 0; i < len; i++)
-				{
-					_putchar(buffer[i]);
-					count++;
-				}
-				format += 2; */
 			else
 			{
 				/* invalid specifier or no specifier, print '%' */
