@@ -10,14 +10,15 @@
  *
  * Return: number of count
  */
-void int_min_checker (int *num, int *count)
+void int_min_checker (int *num, int *count, int *last)
 {
-
 	if (*num == INT_MIN)
 	{
+		*last = abs(*num % 10);
+		*num = (*num / 10) * -1;
 		_putchar('-');
-		*num = *num + 1;
-		*num = -(*num);
+/*		*num = *num + 1; */
+/*		*num = -(*num);*/
 		(*count)++;
 	}
 }
@@ -30,9 +31,10 @@ void int_min_checker (int *num, int *count)
 int print_digit(int num)
 {
 	char *ptr;
+	int last;
 	int count = 0, temp = num, i = 0, j, len = 0;
 
-	int_min_checker(&num, &count);
+	int_min_checker(&num, &count, &last);
 	if (num < 0)
 	{
 		_putchar('-');
@@ -67,6 +69,11 @@ int print_digit(int num)
 			j--;
 			count++;
 		}
+	}
+	if (last != 0)
+	{
+		_putchar(last + '0');
+		count++;
 	}
 	free(ptr);
 	return (count);
